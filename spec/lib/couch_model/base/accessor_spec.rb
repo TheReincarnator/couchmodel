@@ -98,7 +98,12 @@ describe AccessorTestModel do
 
     it "should define writers for boolean types" do
       @model.test_boolean = 1
+      @model.instance_variable_get('@test_boolean').should == '1'
       @model.attributes["test_boolean"].should == true
+
+      @model.test_boolean = 0
+      @model.instance_variable_get('@test_boolean').should == '0'
+      @model.attributes["test_boolean"].should == false
     end
 
     it "should define writers for integer types" do
