@@ -96,6 +96,18 @@ module CouchModel
             @attributes[name.to_s] = value.is_a?(Time) ? value.strftime("%Y-%m-%d %H:%M:%S %z") : value
           end
         end
+        
+        def define_boolean_reader(name)
+          define_method :"#{name}" do
+            @attributes[name.to_s]
+          end
+        end
+
+        def define_boolean_writer(name)
+          define_method :"#{name}=" do |value|
+            @attributes[name.to_s] = value.is_a?(TrueClass) ||  value.is_a?(TrueClass) ? value : value.to_i > 0
+          end
+        end
 
       end
 
