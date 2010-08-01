@@ -3,7 +3,7 @@ Gem::Specification.new do |specification|
   specification.version = "0.1.5"
   specification.date    = "2010-08-01"
 
-  specification.authors   = [ "Philipp Brüll" ]
+  specification.authors   = [ "Philipp Bruell" ]
   specification.email     = "b.phifty@gmail.com"
   specification.homepage  = "http://github.com/phifty/couchmodel"
 
