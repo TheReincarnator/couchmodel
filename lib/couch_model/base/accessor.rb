@@ -105,7 +105,7 @@ module CouchModel
 
         def define_boolean_writer(name)
           define_method :"#{name}=" do |value|
-            casted_value = value.is_a?(TrueClass) ||  value.is_a?(TrueClass) ? value : value.to_i > 0
+            casted_value = value.is_a?(TrueClass) ||  value.is_a?(FalseClass) ? value : value.to_i > 0
             @attributes[name.to_s] = casted_value
             
             # this makes all boolean attributes work with "validates_acceptance_of"
