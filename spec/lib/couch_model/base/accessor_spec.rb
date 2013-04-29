@@ -9,6 +9,7 @@ class AccessorTestModel < CouchModel::Base
   key_writer   :test_two,   :default => "test default"
   key_accessor :test_three, :default => "test default"
 
+  key_accessor :test_boolean, :type => :boolean
   key_accessor :test_integer, :type => :integer
   key_accessor :test_string,  :type => :string
   key_accessor :test_date,    :type => :date
@@ -40,6 +41,11 @@ describe AccessorTestModel do
       lambda do
         AccessorTestModel.key_reader :test, :type => :unsupported
       end.should raise_error(ArgumentError)
+    end
+
+    it "should define readers for boolean types" do
+      @model.test_boolean = 1
+      @model.test_boolean.should be_instance_of(TrueClass)
     end
 
     it "should define readers for integer types" do
@@ -88,6 +94,16 @@ describe AccessorTestModel do
       lambda do
         AccessorTestModel.key_writer :test, :type => :unsupported
       end.should raise_error(ArgumentError)
+    end
+
+    it "should define writers for boolean types" do
+      @model.test_boolean = 1
+      @model.instance_variable_get('@test_boolean').should == '1'
+      @model.attributes["test_boolean"].should == true
+
+      @model.test_boolean = 0
+      @model.instance_variable_get('@test_boolean').should == '0'
+      @model.attributes["test_boolean"].should == false
     end
 
     it "should define writers for integer types" do

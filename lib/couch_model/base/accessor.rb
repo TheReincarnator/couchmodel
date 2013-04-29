@@ -94,6 +94,22 @@ module CouchModel
             @attributes[name.to_s] = value.is_a?(Time) ? value.strftime("%Y-%m-%d %H:%M:%S %z") : value
           end
         end
+        
+        def define_boolean_reader(name)
+          define_method :"#{name}" do
+            @attributes[name.to_s]
+          end
+        end
+
+        def define_boolean_writer(name)
+          define_method :"#{name}=" do |value|
+            casted_value = value.is_a?(TrueClass) ||  value.is_a?(FalseClass) ? value : value.to_i > 0
+            @attributes[name.to_s] = casted_value
+            
+            # this makes all boolean attributes work with "validates_acceptance_of"
+            instance_variable_set("@#{name}", casted_value ? '1' : '0')
+          end
+        end
 
       end
 
