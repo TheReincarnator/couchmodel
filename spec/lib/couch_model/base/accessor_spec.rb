@@ -68,12 +68,6 @@ describe AccessorTestModel do
       @model.test_time.should be_instance_of(Time)
     end
 
-    it "should raise an ArgumentError if the reader method is already defined" do
-      lambda do
-        AccessorTestModel.key_reader :test_one
-      end.should raise_error(ArgumentError)
-    end
-
   end
 
   describe "key_writer" do
@@ -132,12 +126,6 @@ describe AccessorTestModel do
       @model.test_time = "2010-07-07 10:10:10"
       @model.attributes["test_time"].should == "2010-07-07 10:10:10"
       @model.test_time.should == Time.parse("2010-07-07 10:10:10")
-    end
-
-    it "should raise an exception if the writer method is already defined" do
-      lambda do
-        AccessorTestModel.key_writer :test_two
-      end.should raise_error(ArgumentError)
     end
 
   end
