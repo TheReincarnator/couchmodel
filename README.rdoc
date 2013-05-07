@@ -1,5 +1,4 @@
-
-= This project is no longer under development. Visit https://github.com/phifty/gom
+== This fork is trying to keep couchmodel running with Rails 3.2+
 
 = CouchModel
 
